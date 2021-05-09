@@ -9,28 +9,28 @@ interface UserData {
 }
 
 class CreateUserService {
-
-    public async execute({name, email, password}:UserData){
-
+    public async execute({name, email, password}:UserData): Promise<User | {}>{
         const userRepository = getRepository(User);
 
         const checkUserExists = await userRepository.findOne({email})
 
         if(checkUserExists){
-            throw new Error('Email address already exist!')
+            return {
+                error:"Email addrres already exist"
+            }
         }
 
         const hashedPassword = await hash(password, 8);
 
-        const user = {
+        const user = userRepository.create({
             name,
             email,
             password: hashedPassword
-        }
+        });
 
         await userRepository.save(user);
 
-        return user
+        return user;
     }
 }
 

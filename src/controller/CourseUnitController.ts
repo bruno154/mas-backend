@@ -7,9 +7,9 @@ class CourseUnitController {
 
         const createCourseUnit = new CreateCourseUnitService();
 
-        const activy = await createCourseUnit.execute(CourseUnitData);
+        const courseUnit = createCourseUnit.execute(CourseUnitData);
 
-        return response.json(activy);
+        return response.json(courseUnit);
     }
 }
 

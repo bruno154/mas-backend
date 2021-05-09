@@ -10,8 +10,7 @@ interface ActivyData {
 }
 
 class CreateActivyService{
-
-    public async execute({name, activy_date, course_unit_id}:ActivyData){
+    public async execute({name, activy_date, course_unit_id}:ActivyData): Promise<Activy>{
 
         const activyRepository = getRepository(Activy);
 
@@ -21,11 +20,11 @@ class CreateActivyService{
         //    throw new Error('The Activy already exist!')
         //}
 
-        const activy ={
+        const activy =activyRepository.create({
             name,
             activy_date,
             course_unit_id
-        }
+        });
 
         await activyRepository.save(activy);
 

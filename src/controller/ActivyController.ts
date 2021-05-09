@@ -7,7 +7,7 @@ class ActivyController {
 
         const createActivy = new CreateActivyService();
 
-        const activy = await createActivy.execute(activyData);
+        const activy = createActivy.execute(activyData);
 
         return response.json(activy);
     }

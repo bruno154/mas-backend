@@ -2,7 +2,7 @@ import {Column, CreateDateColumn, Entity, ManyToMany, OneToMany, PrimaryColumn} 
 import {v4 as uuid} from 'uuid';
 import { Activy } from './Activy';
 
-@Entity("users")
+@Entity("course_units")
 class CourseUnit{
 
     //Constructor

@@ -3,12 +3,12 @@ import {v4 as uuid} from 'uuid';
 import {CourseUnit} from './CourseUnit';
 
 
-@Entity("users")
+@Entity("activies")
 class Activy{
 
     constructor(){
         if(!this.id){
-            this.id = uuid()
+            this.id = uuid();
         }
     }
 
@@ -20,6 +20,9 @@ class Activy{
 
     @Column()
     name:String;
+
+    @Column()
+    course_unit_id: String;
 
     @CreateDateColumn()
     activy_date: Date;
