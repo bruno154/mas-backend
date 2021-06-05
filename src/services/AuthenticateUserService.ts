@@ -1,6 +1,6 @@
+import { getRepository } from "typeorm"
 import { compare } from "bcryptjs";
 import {sign} from 'jsonwebtoken';
-import { getRepository } from "typeorm"
 import { User } from "../models/User"
 import authConfig from '../config/auth';
 
@@ -22,7 +22,7 @@ class AuthenticateUserService {
             }
         }
 
-        const  comparePassword = compare(password, user.password)
+        const  comparePassword = await compare(password, user.password);
 
         if (!comparePassword){
             return {
@@ -30,7 +30,7 @@ class AuthenticateUserService {
             }
         }
 
-        const {privateKey, expiresIn} = authConfig.jwt
+        const {privateKey, expiresIn} = authConfig.jwt;
 
         const token = sign({"role":"user"}, privateKey, {
             algorithm: 'RS256',
@@ -38,7 +38,16 @@ class AuthenticateUserService {
             expiresIn
 
         })
-        return token
+        const {id, name, email:emailUser} = user
+        
+        return {
+            user:{
+                id,
+                name,
+                email: emailUser
+            },
+            token
+        };
 
     }
 }
